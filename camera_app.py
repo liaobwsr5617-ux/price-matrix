@@ -41,8 +41,46 @@ HTML_TEMPLATE = """
             text-align: center;
             color: #888;
             font-size: 13px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
+        
+        /* 搜尋列與互動工具樣式 */
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: #131c2e;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .tool-box {
+            background: #102338;
+            border: 1px solid var(--main-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .tool-box input, .tool-box select {
+            background: #0b0f19;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        .btn-calc {
+            background: var(--main-color);
+            color: #000;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         .gear-box {
             background: #1a1528;
             border: 1px solid #4a155c;
@@ -100,7 +138,24 @@ HTML_TEMPLATE = """
 <body>
     <div class="container">
         <h1>📷 EOS R8 實戰參數與選單手冊</h1>
-        <div class="subtitle">Cyber Mobile Camera Hub (Pro Edition)</div>
+        <div class="subtitle">Cyber Mobile Camera Hub (Interactive Edition)</div>
+
+        <!-- 即時搜尋列 -->
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜尋關鍵字（例如：閃光、冷白皮、C-Log、風景）..." onkeyup="filterCards()">
+
+        <!-- 互動工具：安全快門速算器 -->
+        <div class="tool-box">
+            <h3 style="margin-top:0; color:#00d2ff; font-size:15px;">⏱️ R8 無防抖安全快門試算</h3>
+            <div style="font-size:13px; margin-bottom:8px;">
+                焦距：<input type="number" id="focalLength" placeholder="50" style="width:60px;"> mm
+                <select id="hasIS">
+                    <option value="0">無防抖鏡頭</option>
+                    <option value="3">開啟鏡頭 IS 防抖 (補償約3檔)</option>
+                </select>
+                <button class="btn-calc" onclick="calcShutter()">計算</button>
+            </div>
+            <div id="shutterResult" style="font-size:13px; color:#00ff66; font-weight:bold;"></div>
+        </div>
 
         <div class="gear-box">
             <b>🎒 裝備清單：</b> Canon EOS R8 | RF 24-240mm | RF 50mm f/1.8 | CPL偏光鏡 | 43mm黑柔鏡 | Fotopro腳架
@@ -204,6 +259,46 @@ HTML_TEMPLATE = """
             </ul>
         </div>
     </div>
+
+    <script>
+        // 搜尋過濾功能
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].innerText.toLowerCase();
+                if (text.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // 安全快門計算功能
+        function calcShutter() {
+            let focal = parseFloat(document.getElementById('focalLength').value);
+            let stops = parseInt(document.getElementById('hasIS').value);
+            let resultDiv = document.getElementById('shutterResult');
+
+            if (!focal || focal <= 0) {
+                resultDiv.innerText = "請輸入正確的焦距！";
+                return;
+            }
+
+            let baseSpeed = 1 / focal; // 基本安全快門秒數
+            if (stops > 0) {
+                baseSpeed = baseSpeed / Math.pow(2, stops); // 算入 IS 補償
+            }
+
+            let denominator = Math.round(1 / baseSpeed);
+            if (denominator < 1) {
+                resultDiv.innerText = "建議手持最低快門：1 秒或更長（建議上腳架）";
+            } else {
+                resultDiv.innerText = "建議手持最低快門：1/" + denominator + "s 或更快";
+            }
+        }
+    </script>
 </body>
 </html>
 """
