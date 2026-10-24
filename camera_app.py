@@ -100,7 +100,7 @@ HTML_TEMPLATE = """
 <body>
     <div class="container">
         <h1>📷 EOS R8 實戰參數與選單手冊</h1>
-        <div class="subtitle">Cyber Mobile Camera Hub (Ref: 極地手記 R8 攻略)</div>
+        <div class="subtitle">Cyber Mobile Camera Hub (Pro Edition)</div>
 
         <div class="gear-box">
             <b>🎒 裝備清單：</b> Canon EOS R8 | RF 24-240mm | RF 50mm f/1.8 | CPL偏光鏡 | 43mm黑柔鏡 | Fotopro腳架
@@ -133,15 +133,14 @@ HTML_TEMPLATE = """
         </div>
 
         <div class="card">
-            <h2>🎬 R8 影片與快速鍵最佳設定 (達人精華)</h2>
+            <h2>🎬 R8 影片與快速鍵設定 (達人精華)</h2>
             <ul>
                 <li>⭐ C1 / C2 快捷坑位：
                     <br>• <b>C1 檔位：</b>設定為「高頻幀（慢動作）」快速切換。
                     <br>• <b>C2 檔位：</b>設定為「Canon Log 3（C-Log 3）」保留最大後期空間。
                 </li>
                 <li>🎙️ 外接麥克風收音：建議切到<b>「手動」</b>，觀察波形在 <b>12 左右</b>，避免過大破音。</li>
-                <li>⚡ 實用短片功能：開啟<b>「預錄功能 (Pre-REC)」</b>可在按下錄影前提前捕捉畫面；短片快門改為全按「開始/停止」。</li>
-                <li>📊 顯示設定：開啟<b>「顯示網格線 (3x3)」</b>與<b>「記錄強調顯示（錄影紅框閃爍）」</b>。</li>
+                <li>⚡ 實用短片功能：開啟<b>「預錄功能 (Pre-REC)」</b>；短片快門改為全按「開始/停止」。</li>
             </ul>
         </div>
 
@@ -176,6 +175,34 @@ HTML_TEMPLATE = """
             </ul>
             <div class="tip">💡 技巧：搭配 43mm 黑柔鏡，夜間燈光會產生漂亮的電影感暈散（Diffusion）。</div>
         </div>
+
+        <div class="card">
+            <h2>🏃‍♂️ 4. 動態與寵物抓拍</h2>
+            <ul>
+                <li>🎛️ 拍攝模式：<span>Tv 檔（快門先決）</span></li>
+                <li>⏱️ 快門速度：<span>$\ge 1/1000s$</span>（凝結奔跑瞬間）</li>
+                <li>🎯 對焦設定：<span>伺服 (SERVO) + 動物/車輛偵測</span></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🌌 5. 星空與銀河攝影</h2>
+            <ul>
+                <li>🎛️ 拍攝模式：<span>M 檔（全手動）</span></li>
+                <li>🔍 光圈與快門：<span>最大光圈 + 15s ~ 20s</span></li>
+                <li>🎞️ 感光度與色溫：<span>ISO 3200 ~ 6400 | WB 3800K</span></li>
+            </ul>
+            <div class="tip">💡 技巧：手動對焦 (MF) 放大 10 倍對準亮星；務必關閉鏡頭防手震與上三腳架。</div>
+        </div>
+
+        <div class="card">
+            <h2>🍣 6. 美食與靜物特寫</h2>
+            <ul>
+                <li>🎛️ 拍攝模式：<span>Av 檔（光圈先決）</span></li>
+                <li>🔍 光圈設定：<span>f/2 ～ f/2.8</span>（營造柔和淺景深）</li>
+                <li>💡 曝光補償：<span>$+0.3 \sim +0.7EV$</span>（讓食物看起來更明亮誘人）</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
@@ -187,5 +214,4 @@ def index():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    print("🚀 結合達人教學的相機戰情室已更新！")
     app.run(host='0.0.0.0', port=port, debug=False)
