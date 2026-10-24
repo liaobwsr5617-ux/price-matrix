@@ -43,8 +43,6 @@ HTML_TEMPLATE = """
             font-size: 13px;
             margin-bottom: 15px;
         }
-        
-        /* 搜尋列與互動工具樣式 */
         .search-box {
             width: 100%;
             padding: 10px;
@@ -70,6 +68,7 @@ HTML_TEMPLATE = """
             padding: 6px 10px;
             border-radius: 5px;
             margin-right: 5px;
+            margin-bottom: 5px;
         }
         .btn-calc {
             background: var(--main-color);
@@ -80,7 +79,6 @@ HTML_TEMPLATE = """
             font-weight: bold;
             cursor: pointer;
         }
-
         .gear-box {
             background: #1a1528;
             border: 1px solid #4a155c;
@@ -138,23 +136,33 @@ HTML_TEMPLATE = """
 <body>
     <div class="container">
         <h1>📷 EOS R8 實戰參數與選單手冊</h1>
-        <div class="subtitle">Cyber Mobile Camera Hub (Interactive Edition)</div>
+        <div class="subtitle">Cyber Mobile Camera Hub (Pro Tools Edition)</div>
 
         <!-- 即時搜尋列 -->
         <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜尋關鍵字（例如：閃光、冷白皮、C-Log、風景）..." onkeyup="filterCards()">
 
-        <!-- 互動工具：安全快門速算器 -->
+        <!-- 互動工具 1：安全快門試算 -->
         <div class="tool-box">
             <h3 style="margin-top:0; color:#00d2ff; font-size:15px;">⏱️ R8 無防抖安全快門試算</h3>
-            <div style="font-size:13px; margin-bottom:8px;">
+            <div style="font-size:13px;">
                 焦距：<input type="number" id="focalLength" placeholder="50" style="width:60px;"> mm
                 <select id="hasIS">
                     <option value="0">無防抖鏡頭</option>
-                    <option value="3">開啟鏡頭 IS 防抖 (補償約3檔)</option>
+                    <option value="3">開啟鏡頭 IS 防抖 (約補償3檔)</option>
                 </select>
                 <button class="btn-calc" onclick="calcShutter()">計算</button>
             </div>
-            <div id="shutterResult" style="font-size:13px; color:#00ff66; font-weight:bold;"></div>
+            <div id="shutterResult" style="font-size:13px; color:#00ff66; font-weight:bold; margin-top:8px;"></div>
+        </div>
+
+        <!-- 互動工具 2：星空 500 法則試算 -->
+        <div class="tool-box">
+            <h3 style="margin-top:0; color:#00d2ff; font-size:15px;">🌌 星空不拖尾曝光時間計算</h3>
+            <div style="font-size:13px;">
+                焦距：<input type="number" id="astroFocal" placeholder="24" style="width:60px;"> mm (全畫幅 R8)
+                <button class="btn-calc" onclick="calcAstro()">試算</button>
+            </div>
+            <div id="astroResult" style="font-size:13px; color:#00ff66; font-weight:bold; margin-top:8px;"></div>
         </div>
 
         <div class="gear-box">
@@ -165,7 +173,7 @@ HTML_TEMPLATE = """
             <h2>🚨 R8 硬性限制與避坑指南</h2>
             <ul>
                 <li>🛡️ 無機身防抖：<span>防抖全靠鏡頭 IS</span>，手持快門切勿低於焦距倒數，無 IS 鏡頭需拉高快門。</li>
-                <li>⚡ 閃光燈限制：<span>必須外接閃光燈</span>；快門務必切到「電子前帘快門」（最高同步 1/200s），<span>電子快門無法使用閃光</span>。</li>
+                <li>⚡ 閃光燈限制：<span>必須外接閃光燈</span>；快門務必切到<span>「電子前帘快門」</span>（最高同步 1/200s），<span>電子快門無法使用閃光</span>。</li>
                 <li>📉 ISO 與曝光：<span>ISO 盡量控制在 3200 內</span>；光線變化時，優先確保安全快門，再調整 ISO。</li>
             </ul>
             <div class="warning">🔥 避坑：使用閃光燈切記用「電子前帘」，用電子快門會導致閃光燈不工作！手持快門建議再提高一檔防糊片。</div>
@@ -261,21 +269,15 @@ HTML_TEMPLATE = """
     </div>
 
     <script>
-        // 搜尋過濾功能
         function filterCards() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('card');
             for (let i = 0; i < cards.length; i++) {
                 let text = cards[i].innerText.toLowerCase();
-                if (text.includes(input)) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                cards[i].style.display = text.includes(input) ? "" : "none";
             }
         }
 
-        // 安全快門計算功能
         function calcShutter() {
             let focal = parseFloat(document.getElementById('focalLength').value);
             let stops = parseInt(document.getElementById('hasIS').value);
@@ -286,10 +288,8 @@ HTML_TEMPLATE = """
                 return;
             }
 
-            let baseSpeed = 1 / focal; // 基本安全快門秒數
-            if (stops > 0) {
-                baseSpeed = baseSpeed / Math.pow(2, stops); // 算入 IS 補償
-            }
+            let baseSpeed = 1 / focal;
+            if (stops > 0) baseSpeed = baseSpeed / Math.pow(2, stops);
 
             let denominator = Math.round(1 / baseSpeed);
             if (denominator < 1) {
@@ -297,6 +297,17 @@ HTML_TEMPLATE = """
             } else {
                 resultDiv.innerText = "建議手持最低快門：1/" + denominator + "s 或更快";
             }
+        }
+
+        function calcAstro() {
+            let focal = parseFloat(document.getElementById('astroFocal').value);
+            let resultDiv = document.getElementById('astroResult');
+            if (!focal || focal <= 0) {
+                resultDiv.innerText = "請輸入正確焦距！";
+                return;
+            }
+            let maxSec = Math.round(500 / focal);
+            resultDiv.innerText = "500 法則不拖尾極限曝光秒數：約 " + maxSec + " 秒";
         }
     </script>
 </body>
