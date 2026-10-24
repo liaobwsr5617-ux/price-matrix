@@ -125,11 +125,11 @@ HTML_TEMPLATE = """
                     <br>• ⚖️ 標準：<span>0, 0, 0, 0, 0, 0</span>
                 </li>
                 <li>☀️ 白平衡偏移（僅對 JPG 生效）：
-                    <br>• ❄️ 冷白皮：<span>B3 G1</span>（適合陰天、樹荫、窗边冷光）
-                    <br>• 🍑 奶油暖肤：<span>A3 M1</span>（適合夕陽、室內暖燈）
+                    <br>• ❄️ 冷白皮：<span>B3 G1</span>（適合陰天、樹蔭、窗邊冷光）
+                    <br>• 🍑 奶油暖膚：<span>A3 M1</span>（適合夕陽、室內暖燈）
                 </li>
             </ul>
-            <div class="tip">💡 提示：冷白皮避開正午強光；奶油暖肤在冷白光下容易發黃怪异，需注意場景搭配。</div>
+            <div class="tip">💡 提示：冷白皮避開正午強光；奶油暖膚在冷白光下容易發黃怪異，需注意場景搭配。</div>
         </div>
 
         <div class="card">
@@ -180,8 +180,8 @@ HTML_TEMPLATE = """
             <h2>🏃‍♂️ 4. 動態與寵物抓拍</h2>
             <ul>
                 <li>🎛️ 拍攝模式：<span>Tv 檔（快門先決）</span></li>
-                <li>⏱️ 快門速度：<span>$\ge 1/1000s$</span>（凝結奔跑瞬間）</li>
-                <li>🎯 對焦設定：<span>伺服 (SERVO) + 動物/車輛偵測</span></li>
+                <li>⏱️ 快門速度：<span>大於等於 1/1000s</span>（凝結奔跑瞬間，極高速運動建議 1/2000s 以上）</li>
+                <li>🎯 對焦設定：<span>伺服 (SERVO) + 動物/車輛偵測 + 追焦特性 Case 2</span></li>
             </ul>
         </div>
 
@@ -200,7 +200,7 @@ HTML_TEMPLATE = """
             <ul>
                 <li>🎛️ 拍攝模式：<span>Av 檔（光圈先決）</span></li>
                 <li>🔍 光圈設定：<span>f/2 ～ f/2.8</span>（營造柔和淺景深）</li>
-                <li>💡 曝光補償：<span>$+0.3 \sim +0.7EV$</span>（讓食物看起來更明亮誘人）</li>
+                <li>💡 曝光補償：<span>+0.3 至 +0.7 EV</span>（讓食物看起來更明亮誘人）</li>
             </ul>
         </div>
     </div>
