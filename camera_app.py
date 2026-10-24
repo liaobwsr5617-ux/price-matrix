@@ -100,7 +100,7 @@ HTML_TEMPLATE = """
 <body>
     <div class="container">
         <h1>📷 EOS R8 實戰參數與選單手冊</h1>
-        <div class="subtitle">Cyber Mobile Camera Hub</div>
+        <div class="subtitle">Cyber Mobile Camera Hub (Ref: 極地手記 R8 攻略)</div>
 
         <div class="gear-box">
             <b>🎒 裝備清單：</b> Canon EOS R8 | RF 24-240mm | RF 50mm f/1.8 | CPL偏光鏡 | 43mm黑柔鏡 | Fotopro腳架
@@ -133,12 +133,15 @@ HTML_TEMPLATE = """
         </div>
 
         <div class="card">
-            <h2>⚙️ 機身選單黃金設定</h2>
+            <h2>🎬 R8 影片與快速鍵最佳設定 (達人精華)</h2>
             <ul>
-                <li>🎯 對焦區域：<span>靈活區域 AF / 人臉+追蹤 AF</span></li>
-                <li>👁️ 主體偵測：<span>人物 / 動物</span></li>
-                <li>🎬 驅動模式：<span>高速連拍 (H+) 或 靜音快門</span></li>
-                <li>💾 影像畫質：<span>RAW 或 C-RAW（保留後期寬容度）</span></li>
+                <li>⭐ C1 / C2 快捷坑位：
+                    <br>• <b>C1 檔位：</b>設定為「高頻幀（慢動作）」快速切換。
+                    <br>• <b>C2 檔位：</b>設定為「Canon Log 3（C-Log 3）」保留最大後期空間。
+                </li>
+                <li>🎙️ 外接麥克風收音：建議切到<b>「手動」</b>，觀察波形在 <b>12 左右</b>，避免過大破音。</li>
+                <li>⚡ 實用短片功能：開啟<b>「預錄功能 (Pre-REC)」</b>可在按下錄影前提前捕捉畫面；短片快門改為全按「開始/停止」。</li>
+                <li>📊 顯示設定：開啟<b>「顯示網格線 (3x3)」</b>與<b>「記錄強調顯示（錄影紅框閃爍）」</b>。</li>
             </ul>
         </div>
 
@@ -184,5 +187,5 @@ def index():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    print("🚀 帶有專屬圖示的相機戰情室已更新！")
+    print("🚀 結合達人教學的相機戰情室已更新！")
     app.run(host='0.0.0.0', port=port, debug=False)
