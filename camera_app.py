@@ -8,7 +8,7 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canon EOS R8 戰情室與選單手冊</title>
+    <title>Canon EOS R8 終極戰情室與選單手冊</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -31,37 +31,50 @@ HTML_TEMPLATE = """
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         h2, h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-top: 0;
         }
         ul {
             padding-left: 20px;
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.7;
         }
         li {
-            font-size: 0.95rem;
-            margin-bottom: 5px;
+            font-size: 0.92rem;
+            margin-bottom: 6px;
+        }
+        .highlight {
+            color: #f1c40f;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h1>📷 Canon EOS R8 隨身指揮中心</h1>
+    <h1>📷 Canon EOS R8 終極指揮中心</h1>
 
-    <!-- 拍攝場景與設定指南 -->
-    <div class="card" style="border-left: 5px solid #9b59b6;">
-        <h3 style="color: #9b59b6;">🌟 拍攝場景快速調校</h3>
+    <!-- 抖音全場景拍攝參數與避坑指南 -->
+    <div class="card" style="border-left: 5px solid #e67e22;">
+        <h3 style="color: #e67e22;">🔥 R8 全場景拍攝參數與避坑指南</h3>
         <ul>
-            <li><b>風景攝影：</b>光圈 f/8 - f/11，ISO 100，使用三腳架與 CPL 濾鏡。</li>
-            <li><b>街頭隨拍：</b>快門優先或光圈優先，開啟電子前簾快門降低延遲。</li>
-            <li><b>夜景/黑柔霧：</b>搭配 43mm 黑柔霧鏡，控制高光不過曝，手持注意安全快門。</li>
+            <li><b>硬性防抖：</b>R8 無機身防抖，全靠鏡頭 IS；手持快門不慢於焦距倒數，無 IS 鏡頭須提高快門。</li>
+            <li><b>閃光燈限制：</b>無內閃須外接；外接閃光燈務必切換為 <span class="highlight">【電子前簾快門】</span>（最高同步 1/200s），純電子快門無法使用閃光燈！</li>
+            <li><b>照片風格固定參數：</b>
+                <br>• 人像風格：0, 2, 1, 0, -1, 0
+                <br>• 風景風格：2, 2, 1, 0, 0, 0
+                <br>• 標準風格：0, 0, 0, 0, 0, 0
+            </li>
+            <li><b>白平衡偏移 (僅對 JPG 生效，RAW 不受影響)：</b>
+                <br>• 冷白皮（陰天/樹蔭/窗邊冷光）：<span class="highlight">B3 G1</span>
+                <br>• 奶油暖膚（下午夕陽/室內暖燈）：<span class="highlight">A3 M1</span>
+            </li>
+            <li><b>核心避坑：</b>ISO 盡量控制在 3200 內防噪；明暗變化優先保證安全快門，再調整 ISO。</li>
         </ul>
     </div>
 
     <!-- Canon EOS R8 選單目錄速查 -->
     <div class="menu-container">
-        <h2 style="text-align: center; margin: 20px 0 15px 0;">📑 R8 官方選單速查</h2>
+        <h2 style="text-align: center; margin: 20px 0 15px 0; color: #fff;">📑 R8 官方選單設置速查</h2>
 
         <!-- 🔴 拍攝選單 (SHOOT) -->
         <div class="card" style="border-left: 5px solid #e74c3c;">
@@ -69,9 +82,9 @@ HTML_TEMPLATE = """
             <ul>
                 <li><b>SHOOT 1：</b>影像畫質 (RAW / C-RAW / JPEG)</li>
                 <li><b>SHOOT 3：</b>ISO 感光度設定 / 曝光補償</li>
-                <li><b>SHOOT 4：</b>相片風格 (Picture Style) / 白平衡 (WB) 與偏移</li>
-                <li><b>SHOOT 6：</b>快門模式 (電子前簾 / 純電子)</li>
-                <li><b>SHOOT 8：</b>IS (防手震) 設定 / 數位防手震 (Digital IS)</li>
+                <li><b>SHOOT 4：</b>相片風格設定 & 白平衡偏移 (WB Shift 調整冷白皮/奶油肌)</li>
+                <li><b>SHOOT 6：</b>快門模式設定（外接閃光燈必切「電子前簾」）</li>
+                <li><b>SHOOT 8：</b>IS (防手震) 設定 / 數位防手震</li>
             </ul>
         </div>
 
@@ -98,12 +111,12 @@ HTML_TEMPLATE = """
 
         <!-- 🟢 我的選單 (MY MENU) -->
         <div class="card" style="border-left: 5px solid #2ecc71;">
-            <h3 style="color: #2ecc71;">🟢 我的選單 (MY MENU) 建議配置</h3>
+            <h3 style="color: #2ecc71;">🟢 我的選單 (MY MENU) 推薦配置</h3>
             <ul>
                 <li><b>首選 1：</b>格式化記憶卡 (Format)</li>
                 <li><b>首選 2：</b>快門模式 (電子前簾 / 純電子切換)</li>
-                <li><b>首選 3：</b>白平衡偏移 / 包夾 (WB Shift/Bkt)</li>
-                <li><b>首選 4：</b>要偵測的主體 (人物 / 車輛)</li>
+                <li><b>首選 3：</b>白平衡偏移 (快速切換 B3G1 / A3M1)</li>
+                <li><b>首選 4：</b>主體偵測 (人物 / 車輛切換)</li>
             </ul>
         </div>
     </div>
